@@ -366,7 +366,7 @@ async function applyFit(force = false): Promise<void> {
   rerender()
 }
 
-toggleSidebarButton.addEventListener('click', () => setSidebarVisible(sidebar.hidden))
+toggleSidebarButton.addEventListener('click', () => setSidebarVisible(!sidebar.hidden))
 
 let skipZoomCommit = false
 zoomInput.addEventListener('focus', () => zoomInput.select())
