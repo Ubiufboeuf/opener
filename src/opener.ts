@@ -1,48 +1,29 @@
-
 import * as vscode from 'vscode'
+import { createPdfHtml } from './formats/pdf'
 
 export class OpenerProvider implements vscode.CustomReadonlyEditorProvider {
+  constructor(private readonly extensionUri: vscode.Uri) {}
+
   openCustomDocument(uri: vscode.Uri): vscode.CustomDocument {
-    return {
-      uri,
-      dispose() {}
-    }
+    return { uri, dispose() {} }
   }
 
   resolveCustomEditor(
     document: vscode.CustomDocument,
     panel: vscode.WebviewPanel
   ): void {
+    const mediaRoot = vscode.Uri.joinPath(this.extensionUri, 'dist', 'webview')
+    const documentFolder = vscode.Uri.joinPath(document.uri, '..')
+
     panel.webview.options = {
-      enableScripts: true
+      enableScripts: true,
+      localResourceRoots: [mediaRoot, documentFolder]
     }
 
-    panel.webview.html = `
-      <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <title>Opener</title>
-        </head>
-        <body>
-          <h2>Opener</h2>
-          <p>File: ${this.escapeHtml(document.uri.path)}</p>
-        </body>
-      </html>
-    `
-  }
-
-  private escapeHtml(value: string): string {
-    return value.replace(/[&<>"']/g, (char) => {
-      const entities: Record<string, string> = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
-      }
-
-      return entities[char] ?? ''
-    })
+    panel.webview.html = createPdfHtml(
+      panel.webview,
+      mediaRoot,
+      document.uri
+    )
   }
 }

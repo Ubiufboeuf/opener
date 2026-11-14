@@ -1,9 +1,8 @@
-
 {
   "name": "opener",
   "displayName": "Opener",
-  "description": "Universal file opener for VS Code",
-  "version": "0.0.1",
+  "description": "Lightweight, automatic file opener for VS Code and Code OSS",
+  "version": "0.0.3",
   "publisher": "local",
   "private": true,
   "main": "./dist/extension.js",
@@ -11,8 +10,12 @@
     "vscode": "^1.96.0"
   },
   "scripts": {
-    "build": "bun build ./src/extension.ts --target=node --format=cjs --external vscode --outdir ./dist",
+    "build": "node scripts/build.mjs",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tabler/icons": "^3.52.0",
+    "pdfjs-dist": "^6.5.438"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -26,11 +29,7 @@
         "viewType": "opener.preview",
         "displayName": "Opener",
         "selector": [
-          { "filenamePattern": "*.pdf" },
-          { "filenamePattern": "*.flac" },
-          { "filenamePattern": "*.ogg" },
-          { "filenamePattern": "*.webp" },
-          { "filenamePattern": "*.avif" }
+          { "filenamePattern": "*.pdf" }
         ],
         "priority": "default"
       }

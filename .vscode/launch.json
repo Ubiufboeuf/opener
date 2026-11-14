@@ -5,10 +5,8 @@
       "name": "Run Opener",
       "type": "extensionHost",
       "request": "launch",
-      "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}"
-      ],
-      "preLaunchTask": "npm: build"
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+      "preLaunchTask": "build opener"
     }
   ]
 }

@@ -1,11 +1,11 @@
 import * as vscode from 'vscode'
 import { OpenerProvider } from './opener'
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext): void {
   context.subscriptions.push(
     vscode.window.registerCustomEditorProvider(
       'opener.preview',
-      new OpenerProvider()
+      new OpenerProvider(context.extensionUri)
     )
   )
 }
