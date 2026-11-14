@@ -1,0 +1,39 @@
+
+{
+  "name": "opener",
+  "displayName": "Opener",
+  "description": "Universal file opener for VS Code",
+  "version": "0.0.1",
+  "publisher": "local",
+  "private": true,
+  "main": "./dist/extension.js",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "scripts": {
+    "build": "bun build ./src/extension.ts --target=node --format=cjs --external vscode --outdir ./dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^26.6.6",
+    "@types/vscode": "^1.146.0",
+    "typescript": "5"
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "opener.preview",
+        "displayName": "Opener",
+        "selector": [
+          { "filenamePattern": "*.pdf" },
+          { "filenamePattern": "*.flac" },
+          { "filenamePattern": "*.ogg" },
+          { "filenamePattern": "*.webp" },
+          { "filenamePattern": "*.avif" }
+        ],
+        "priority": "default"
+      }
+    ]
+  }
+}
