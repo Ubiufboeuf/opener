@@ -1,5 +1,5 @@
 {
-  "name": "opener",
+  "name": "mango-opener",
   "displayName": "Opener",
   "description": "Lightweight, automatic file opener for VS Code and Code OSS",
   "version": "0.1.0",
