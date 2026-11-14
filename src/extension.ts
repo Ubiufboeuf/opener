@@ -5,7 +5,7 @@ export function activate(context: vscode.ExtensionContext): void {
   context.subscriptions.push(
     vscode.window.registerCustomEditorProvider(
       'opener.preview',
-      new OpenerProvider(context.extensionUri)
+      new OpenerProvider(context)
     )
   )
 }
